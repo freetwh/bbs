@@ -1,0 +1,21 @@
+extends layouts/main
+block head
+	style.
+		.form input,.form select{
+			background:transparent;
+			-webkit-appearance:none;
+		}
+block content
+	include layouts/header
+	form.form(method="post",action="/editpwd")
+		.section.pt2.vm
+			label(for="oldpwd").fx1 旧密码：
+			input(type="text",name="oldpwd",required)#oldpwd.fx3.fc6.bb
+		.section.pt2.vm
+			label(for="newpwd").fx1 新密码：
+			input(type="text",name="newpwd",required)#newpwd.fx3.fc6.bb
+		.section.pt2.vm
+			label(for="cfmpwd").fx1 确认新密码：
+			input(type="text",name="cfmpwd",required)#cfmpwd.fx3.fc6.bb
+		.section.vm
+			input.btn(type="submit",value="保存").pct50w.left25.mb1.mt1

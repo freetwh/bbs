@@ -1,0 +1,21 @@
+doctype html
+html
+	head
+		title= title
+		meta(name="viewport",content="width=device-width,initial-scale=0.5,user-scalable=no")
+		link(rel="stylesheet", href="/styles/bootstrap.min.css")
+		link(rel="stylesheet",href="/styles/basic.css")
+		link(rel="stylesheet",href="/styles/admin.css")
+		script(src="/js/common.js")
+	block head
+	body
+		.jumbotron
+			.container
+				h2 移动论坛 后台管理系统
+				if admin
+					h5 欢迎 #{admin}
+		block content
+		script(src="/js/jQuery-2.1.4.js")
+		script(src="/js/bootstrap.min.js")
+		script(src="/js/common.js")
+		block script

@@ -1,0 +1,129 @@
+/*------ initial -----*/
+input,textarea,select{
+    font-size:100%;
+    border:none;
+    outline:none;
+    font-family:arial;
+    font-family:inherit;
+}
+body,h1,h2,h3,h4,h5,h6,p,ul,ol,form,figure,blockquote{
+    margin:0;
+}
+h4,h5,h6{
+    font-size:1em;
+}
+ul,ol{
+    padding-left:0;
+    list-style:none;
+}
+a {
+	text-decoration: none;
+	color:inherit;
+}
+/*image with no-border*/
+img{border:0;}
+
+figure {text-align: center;}
+
+/*--------个性字体引入-----------*/
+@font-face {
+    font-family: 'time';
+    src: url('../fonts/time.ttf?7owwpb') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+/*----------- 图标字体引入 ---------*/
+@font-face {
+    font-family: 'icomoon';
+    src:    url('../fonts/icomoon.eot?y0ca5o');
+    src:    url('../fonts/icomoon.eot?y0ca5o#iefix') format('embedded-opentype'),
+        url('../fonts/icomoon.ttf?y0ca5o') format('truetype'),
+        url('../fonts/icomoon.woff?y0ca5o') format('woff'),
+        url('../fonts/icomoon.svg?y0ca5o#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.icons,[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sun:before {
+    content: "\e900";
+}
+.icon-male:before {
+    content: "\e901";
+}
+.icon-female:before {
+    content: "\e902";
+}
+.icon-pen:before {
+    content: "\e903";
+}
+.icon-trash-can:before {
+    content: "\e904";
+}
+.icon-sports-shoe:before {
+    content: "\e905";
+}
+.icon-pencil2:before {
+    content: "\e906";
+}
+.icon-quill:before {
+    content: "\e907";
+}
+.icon-spinner9:before {
+    content: "\e908";
+}
+.icon-spinner11:before {
+    content: "\e909";
+}
+.icon-search:before {
+    content: "\e90a";
+}
+.icon-home2:before {
+    content: "\e90c";
+}
+.icon-pencil:before {
+    content: "\e90d";
+}
+.icon-image:before {
+    content: "\e90e";
+}
+.icon-camera:before {
+    content: "\e90f";
+}
+.icon-location2:before {
+    content: "\e910";
+}
+
+
+
+/*---------- css样式库 ----------*/
+.txt-c {text-align: center;}
+.l{float: left;}
+.r{float:right;}
+/*背景*/
+.bg-vtl{background-image:  url(../imgs/bg_hall.jpg);}
+.bg-crs{background-image:  url(../imgs/bg_lib.jpg);}
+.bg-blue{background-color: rgba(35,170,227,.5);}
+/*盒模型*/
+.mt1{margin-top: 1rem;}
+.mt2{
+	margin-top: 2rem;
+}
+.mr1{margin-right: 1rem;}
+.mb1{margin-bottom: 1rem;}
+.p1{padding:1rem;}
+.pt2{padding-top:2rem;}

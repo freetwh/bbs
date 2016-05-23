@@ -1,0 +1,45 @@
+{
+  "name": "discuz",
+  "version": "1.0.0",
+  "description": "mobile discuz powered by Tang wenhao",
+  "main": "app.js",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "cookie-parser": "^1.4.1",
+    "body-parser": "^1.14.2",
+    "crypto": "^0.0.3",
+    "express": "^4.13.3",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.13.0",
+    "connect-mongo": "^1.1.0",
+    "formidable": "^1.0.17",
+    "moment": "^2.11.0",
+    "jquery-file-upload-middleware": "^0.1.7",
+    "mongo": "^0.1.0",
+    "mongoose": "^4.3.1",
+    "path": "^0.12.7",
+    "jade": "^1.11.0",
+    "session": "^0.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/puretang/discuz.git"
+  },
+  "keywords": [
+    "discuz",
+    "node.js",
+    "mongoose",
+    "express",
+    "jade"
+  ],
+  "author": "Tang wenhao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/puretang/discuz/issues"
+  },
+  "homepage": "https://github.com/puretang/discuz#readme"
+}

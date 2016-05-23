@@ -1,0 +1,19 @@
+body{
+    background:#000;
+}
+.fcc {color:#ccc;}
+.fc3 {color:#333;}
+.fc6 {color:#666;}
+.b-box {
+	color:#ccc;
+}
+/*动态改变整站主题：*/
+/*用户表增加theme字段：
+记录当前主题（default||night）
+固定导航超链接增加路由,导航链接点击过后刷新当前页面
+路由内容：将session.theme发送至页面 （尝试app.locals）
+主文件判断：
+若 if theme == default
+	link(default...)
+   else
+   	link(simple....)*/

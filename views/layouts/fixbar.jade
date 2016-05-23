@@ -1,0 +1,26 @@
+//- 技术冻结：条件判断isLogin，如果isLogin为true则不显示fixbar
+if !isLogin
+	.unlogin.container.fix.tb8.fcc
+		a.r(href="/register") 注册
+		a.r(href="/login?pre="+cur) 登录
+		a.tnt2.container(href="javascript:void(0)")= footinfo
+else
+	.islogin.container.fix.vm.tb8.fcc.txt-c
+		//- a.fx1.h3.icon-sun#tab-theme(href="javascript:void(0)")
+		a.fx1.h3.icon-home2(href="/")
+		a.fx1.h3.icon-quill(href="/publish")
+		.status.h3.vm
+			a(href="/homepage/"+userId).fx3 欢迎 #{username}
+			a.fx1(href="/logout") 退出
+script.
+	var simple = true;
+	$('#tab-theme').click(function(){
+			$(this).addClass('turn');
+			if(simple) {
+				$('#theme').attr('href','/styles/theme-simple.css');
+				simple = false;
+			} else {
+				$('#theme').attr('href','/styles/theme-cool.css');
+				simple = true;
+			}
+	})

@@ -1,0 +1,18 @@
+body{
+    background-image:  url(../imgs/bg_hall.jpg);
+}
+header{
+	background-color: rgba(255,255,255,.3);
+}
+.fcc {color:#ccc;}
+.fc3 {color:#333;}
+.fc6 {color:#666;}
+.b-box {
+	color:#eee;
+}
+
+.tb3{background-color:rgba(0,0,0,.3);}
+.tb8{background-color:rgba(0,0,0,.8);}
+.tw3{background-color: rgba(255,255,255,.3);}
+.tw5{background-color: rgba(255,255,255,.5);}
+.tw8{background-color: rgba(255,255,255,.8);}

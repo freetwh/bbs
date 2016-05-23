@@ -1,0 +1,46 @@
+
+/*焦点图*/
+.ppts,
+.ppt-wp {
+	position: relative;
+	height: 15rem;
+	opacity: .9;
+}
+.ppt-wp>div {
+	position: absolute;
+	top:0;
+	left:0;
+	height: 100%;
+	opacity: 0;
+	-webkit-transition:all linear 1600ms;
+	   -moz-transition:all linear 1600ms;
+	    -ms-transition:all linear 1600ms;
+	     -o-transition:all linear 1600ms;
+	     	transition:all linear 1600ms;
+}
+.ppt-wp{
+	position: relative;
+}
+.ppt-wp .cur{
+	opacity: 1;
+}
+.ctrl-wp{
+	position: absolute;
+	bottom: 0;
+	left:0;
+	display: -webkit-flex;
+	width:100%;
+	height: .5rem;
+}
+.ctrl-wp span{
+	display: inline-block;
+	-webkit-flex:1;
+	-webkit-transition:all linear 1600ms;
+	   -moz-transition:all linear 1600ms;
+	    -ms-transition:all linear 1600ms;
+	     -o-transition:all linear 1600ms;
+	     	transition:all linear 1600ms;
+}
+.ctrl-wp .on{
+	background-color: rgba(200,200,200,.5);
+}

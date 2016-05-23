@@ -1,0 +1,110 @@
+extends ../layouts/pc.jade
+block head
+block content
+	.container-fluid
+		.container.mt2
+			.row
+				.col-lg-2.col-md-2
+					ul.nav.nav-pills.nav-stacked
+						li.active(role="presentation").on
+							a 用户管理
+						li(role="presentation")
+							a 话题管理
+						li(role="presentation")
+							a 评论管理
+						li(role="presentation")
+							a 回复管理
+				.col-lg-10.col-md-10
+					ul.list-group
+						each u,index in users
+							li.list-group-item
+								a.del.r(href="/delete?user="+u._id) 删除
+								p=u.username
+					.text-center
+						ul.pagination
+							li
+								a(href="#",aria-label="Previous")
+									span(aria-hidden="true") &laquo;
+							li
+								a(href="#") 1
+							li
+								a(href="#",aria-label="Next")
+									span(aria-hidden="true") &raquo;
+					ul.list-group
+						each t,index in topics
+							li.list-group-item
+								a.del.r(href="/delete?topic="+t._id) 删除
+								a.r(href="/topics/"+t._id) 查看
+								p=t.title
+					.text-center
+						ul.pagination
+							li
+								a(href="#",aria-label="Previous")
+									span(aria-hidden="true") &laquo;
+							li
+								a(href="#") 1
+							li
+								a(href="#",aria-label="Next")
+									span(aria-hidden="true") &raquo;
+					ul.list-group
+						each c,index in comments
+							li.list-group-item
+								a.del.r(href="/delete?comment="+c._id) 删除
+								a.r(href="/topics/"+c.topic._id) 查看
+								p #{c.publisher.username} 评论：#{c.content}
+					.text-center
+						ul.pagination
+							li
+								a(href="#",aria-label="Previous")
+									span(aria-hidden="true") &laquo;
+							li
+								a(href="#") 1
+							li
+								a(href="#") 2
+							li
+								a(href="#",aria-label="Next")
+									span(aria-hidden="true") &raquo;
+					ul.list-group
+						each r,index in reply
+							li.list-group-item
+								a.del.r(href="/delete?reply="+r.reply._id) 删除
+								a.r(href="/topics/"+r.topic._id) 查看
+								p #{r.reply.from.username} 对 #{r.reply.to.username} 说：#{r.reply.content}
+					.text-center
+						ul.pagination
+							li
+								a(href="#",aria-label="Previous")
+									span(aria-hidden="true") &laquo;
+							li
+								a(href="#") 1
+							li
+								a(href="#",aria-label="Next")
+									span(aria-hidden="true") &raquo;
+block script
+	script.
+		window.onload=function(){
+			//- addSlide(tabs)
+			addDelete()
+		}
+		function addDelete(){
+			$('.del').click(function(e){
+				e.preventDefault()
+				var cfm = confirm('确定要删除?');
+				if(cfm){
+					var it = $(this)
+					var url = it.attr('href')
+					$.ajax({
+						type:'get',
+						url:url,
+						success:function(msg){
+							if (msg = 'success'){
+								it.parent().remove();
+								alert('已删除√')
+								}
+						}
+					})
+				}
+			})
+		}
+	script(src="/js/ppt.js")
+

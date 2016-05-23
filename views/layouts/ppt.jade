@@ -1,0 +1,30 @@
+//焦点图
+.container.ppts#ppts
+	.ppt-wp#ppt-wp
+		//each item,index in pptData
+		div.cur
+			a
+				img.aimg(src="imgs/01.jpg")
+		div
+			a
+				img.aimg(src="imgs/02.jpg")
+	.ctrl-wp#ctrl-wp
+		//each item,index in pptData
+		span.on
+		span
+script.
+	var doc = document;
+	var ppts={
+		wrapper:doc.getElementById('ppts'),
+		ppts:doc.getElementById('ppt-wp').getElementsByTagName('div'),
+		pptW:doc.getElementById('ppt-wp').getElementsByTagName('div')[0].offsetWidth,
+		ctrls:doc.getElementById('ctrl-wp').getElementsByTagName('span'),
+		max:doc.getElementById('ppt-wp').getElementsByTagName('div').length,
+		switchtime:3000,
+		autoSwitch:true,
+		control:false,
+	}
+	window.onload=function(){
+		addSlide(ppts)
+	}
+script(src="js/ppt.js")

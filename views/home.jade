@@ -1,0 +1,25 @@
+extends layouts/main
+block head
+	link(rel="stylesheet",href="styles/ppt.css")
+block content
+	#load
+		.loader Loading...
+	include layouts/header
+	include layouts/ppt
+	//话题列表
+	.container.mt1(role="content")
+		if topics
+			each item,index in topics
+				a(href="/topics/"+item._id)
+					.topic.section.tw3.mb1
+						h2=item.title
+						p= item.content
+						.bar
+							span= item.publisher.username
+							time= item.launchTime.output()
+	include layouts/fixbar
+block script
+	script.
+		window.onload = function(){
+			document.getElementById('load').style.display = 'none';
+		}

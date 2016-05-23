@@ -1,0 +1,18 @@
+extends ../layouts/pc.jade
+block head
+block content
+	.container-fluid
+		.container.mt2
+			.row
+				form.form.form-horizontal.col-lg-4.col-md-4(action="/admin/login",method="post")
+					.form-group
+						label.col-sm-4.col-md-4.control-label(for="adminname") 管理员
+						.col-md-8.col-sm-8
+							input.form-control#adminname(type="text",name="admin[adminname]",required)
+					.form-group
+						label.col-sm-4.col-md-4.control-label(for="password") 密码
+						.col-md-8.col-sm-8
+							input.form-control#password(type="password",name="admin[password]",required)
+					.form-group
+						.col-md-8.col-sm-8.col-md-offset-4.col-sm-offset-4
+							input.btn.btn-primary(type="submit",value="登陆")

@@ -1,0 +1,13 @@
+extends layouts/main
+block head
+block content
+	include layouts/header
+	form.form(method="post",action="/publish")
+		.section.mt2.vm
+			label(for="title").fx1 主题：
+			input#title(type="text",name="topic[title]",required).fx3.tw3
+		.section.mt2.vt
+			label.fx1 内容：
+			textarea.fx3.tw3.h10(name="topic[content]")
+		.section.mt2
+			input.btn.left25(type="submit",value="发表").pct75w
