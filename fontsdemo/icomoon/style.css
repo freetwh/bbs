@@ -1,0 +1,87 @@
+@font-face {
+    font-family: 'icomoon';
+    src:    url('fonts/icomoon.eot?9ldwnl');
+    src:    url('fonts/icomoon.eot?9ldwnl#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?9ldwnl') format('truetype'),
+        url('fonts/icomoon.woff?9ldwnl') format('woff'),
+        url('fonts/icomoon.svg?9ldwnl#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-sun:before {
+    content: "\e900";
+}
+.icon-male:before {
+    content: "\e901";
+}
+.icon-female:before {
+    content: "\e902";
+}
+.icon-chat:before {
+    content: "\e903";
+}
+.icon-pen:before {
+    content: "\e904";
+}
+.icon-twitch:before {
+    content: "\e905";
+}
+.icon-trash-can:before {
+    content: "\e906";
+}
+.icon-sports-shoe:before {
+    content: "\e907";
+}
+.icon-pencil2:before {
+    content: "\e908";
+}
+.icon-quill:before {
+    content: "\e909";
+}
+.icon-spinner9:before {
+    content: "\e90a";
+}
+.icon-spinner11:before {
+    content: "\e90b";
+}
+.icon-search:before {
+    content: "\e90c";
+}
+.icon-man:before {
+    content: "\e90d";
+}
+.icon-woman:before {
+    content: "\e90e";
+}
+.icon-home2:before {
+    content: "\e90f";
+}
+.icon-pencil:before {
+    content: "\e910";
+}
+.icon-image:before {
+    content: "\e911";
+}
+.icon-camera:before {
+    content: "\e912";
+}
+.icon-location2:before {
+    content: "\e913";
+}
+

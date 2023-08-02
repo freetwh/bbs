@@ -1,0 +1,120 @@
+extends layouts/main
+block head
+	link(rel="stylesheet",href="/styles/homepage.css")
+	script.
+		if(is_weixin()){
+			var wall = document.getElementsByClassName('.wall')[0];
+			wall.style.height = '100%';
+			wall.className += "p1 container";
+		}
+block content
+	.container.wall.tb3.vm.cm
+		figure.fcc
+			div.img.round.photo-b(style="background-image:url(/imgs/photo"+_user.photo+")")
+			figcaption.pt1.nickname= _user.username
+			figcaption.pt1.sex= _user.sex
+			figcaption.pt1.sign= _user.sign
+	#ppts.container.tab.tw8.fc3.fx3
+		.ctrl-wp#ctrl-wp.cm.bb
+			span.on 基本资料
+			span 我的话题
+			span 最近回复
+		.ppt-wp#ppt-wp
+			div.ppt.cur
+				.section
+					p.pt2.vm
+						span.fx1 用户名:
+						span.bb.fx3=_user.username
+					p.pt2.vm
+						input(type="hidden",value=_user.sex)#sex-key
+						span.fx1 性别:
+						span.bb.fx3.sex=_user.sex
+					p.pt2.vm
+						span.fx1 年龄:
+						span.bb.fx3=_user.age
+					p.pt2.vm
+						span.fx1 电话:
+						span.bb.fx3=_user.tel
+					p.pt2.vm
+						span.fx1 地址:
+						span.bb.fx3=_user.addr
+					div.edit
+						a.icon-pen(href='/editinfo') 编辑
+			div.ppt
+				//话题列表
+				if topics
+					.container.mt1
+						each item,index in topics
+							a(href="/topics/"+item._id)
+								.topic.section.tw3.mb1
+									span(data-url="/delete?topic="+item._id).del.icon-trash-can
+									h2=item.title
+									p= item.content
+									.bar
+										span= item.publisher.username
+										time= item.launchTime.output()
+			div.ppt#comment
+				//回复列表
+				if reply
+					.container.mt1
+						each item,index in reply
+							a(href="/topics/"+item.topic._id)
+								.topic.section.tw3.mb1
+									//- 下面的a标签一出现就造成就够紊乱 jade中结构紊乱只是因为不正确的嵌套。
+									//- span(data-url="/delete?rpId="+item.reply._id+"&topic="+item.topic._id).del.icon-trash-can
+									h2 #{item.reply.from.username} 对你说:#{item.reply.content}
+									p.title 话题：#{item.topic.title}
+									.bar
+										time= item.reply.rpTime.output()
+	include layouts/fixbar
+block script
+	script.
+		var doc = document;
+		var tabs={
+			wrapper:doc.getElementById('ppts'),
+			ppts:doc.getElementById('ppt-wp').getElementsByClassName('ppt'),
+			ctrls:doc.getElementById('ctrl-wp').getElementsByTagName('span'),
+			autoSwitch:false,
+		}
+		//性别处理
+		$('.sex').html(getSex())
+		console.log($('.sex').eq(0).text())
+		//添加符号
+		var sex = $('.sex').eq(0);
+		var newSpan = $('<span></span>');
+		switch(sex.text()){
+			case '男':
+				newSpan.addClass('iconfont icon-male');
+				break;
+			case '女':
+				newSpan.addClass('iconfont icon-female');
+				break;
+			default:
+				break;
+		}
+		sex.append(newSpan);
+		function addDelete(ajax){
+			$('.del').click(function(e){
+				e.preventDefault()
+				var cfm = confirm('确定要删除?');
+				if(cfm){
+					var it = $(this)
+					var url = it.attr('data-url')
+					$.ajax({
+						type:'get',
+						url:url,
+						success:function(msg){
+							if (msg = 'success'){
+								it.parent().parent().remove();
+								alert('已删除√')
+								}
+						}
+					})
+				}
+			})
+		}
+		window.onload=function(){
+			addSlide(tabs)
+			addDelete()
+		}
+	script(src="/js/ppt.js")

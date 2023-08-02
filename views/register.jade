@@ -1,0 +1,24 @@
+extends layouts/main
+block head
+  style.
+    .fx3 {
+      background:transparent;
+    }
+    h2 {line-height:3rem;}
+block content
+  form.form(action="/register",method="POST")
+    .section.cm
+      h2 欢迎加入 #{basic.site}
+    input(type="hidden",name="_csrf",value=csrf)
+    .section.mt2.vm
+      label.pt1.fx1(for="username") 用户名：
+      input.bb.fx3#username(type="text",required,name="user[username]",placeholder="以英文字母开头，至少6位",pattern="^[a-zA-Z]\\w{0,}")
+    .section.mt2.vm
+      label.fx1(for="password") 密码：
+      input.bb.fx3#password(type="password",required,name="user[password]",placeholder="至少为6位",pattern="\\w{6,}")
+    .section.mt2.vm
+      input.btn.pct50w.left25.mb1.mt1(type="submit",value="注册")
+block script
+  script.
+    var message = "感谢注册，欢迎萌新加入校园移动论坛"
+  //- script(type="text/javascript",src="js/dealForm.js")

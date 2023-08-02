@@ -1,0 +1,16 @@
+extends layouts/main
+block head
+block content
+	include layouts/header
+	form.form(method="post",action)
+		.section.mt2.vt
+			label.fx1 内容：
+			textarea#content(name="content",required,placeholder="内容至少包含2个汉字，最多120个汉字。",pattern="([\u4E00-\u9FA5]|\\w){10,120}").fx3.tw3.h10
+			input(type="hidden" name="topic" value=topic)
+			input(type="hidden" name="floor" value=floor)
+			input(type="hidden" name="toId" value=toId)
+		.section.mt2
+			input.btn.left25(type="submit",value="发表").pct75w
+block script
+	script.
+		checkText();

@@ -1,0 +1,85 @@
+extends layouts/main.jade
+block head
+	style.
+		.search-group {
+			margin:1rem auto;
+			height:2rem;
+			line-height:2rem;
+			width:25rem;
+		}
+		.search-group input[type="text"] {
+			width:85%;
+			height:2rem;
+			color:#fff;
+			background-color:transparent;
+			border-bottom:1px solid #fff;
+		}
+		.search-group .search {
+			display:inline-block;
+			height:2rem;
+			width:2rem;
+			font-size:1.6rem;
+		}
+block content
+	form.search-box(action="/search",method="post")
+		.search-group
+			input(type="text",name="searchText")#searchText
+			span.icons.search.icon-search
+	.result
+		if topics
+			each item,index in topics
+				a(href="/topics/"+item._id)
+					.topic.section.tw3.mb1
+						h2=item.title
+						p= item.content
+						.bar
+							span= item.publisher.username
+							time= item.launchTime.output()
+block script
+	script.
+		$('.search').click(function(){
+			send();
+		})
+		$('.search-box').submit(function(e){
+			e.preventDefault();
+			send();
+		})
+		function send(){
+			var url = $('.search-box').attr('action'),
+					searchText = $('#searchText').val(),
+					data = 'searchText='+searchText;
+					//- console.log(data)
+				$.ajax({
+						url:url,
+						data:data,
+						type:'post',
+						success:function(msg){
+							showResult(msg,searchText);
+					},
+					error:function(err){
+						console.log(err)
+					}
+				})
+		}
+		function showResult(msg,text){
+			var result = $('.result');
+			result.html('');
+			for(var i = 0;i<msg.length;i++){
+				var topic = msg[i],
+					_id = topic._id,
+					title = topic.title,
+					content = topic.content,
+					publisher = topic.publisher.username,
+					time = topic.launchTime;
+					var status = $('<span>'+publisher+'</span>'+'\n'+'<time>'+time+'</time>'),
+						bar = $('<div class="bar"></div>'),
+						content = $('<h2>'+title+'</h2>'+'\n'+'<p>'+content+'</p>'),
+						topic = $('<div class="topic section tw3 mb1"></div>'),
+						a = $('<a href="/topics/'+_id+'"></a>');
+						status.appendTo(bar);
+						topic.append(content).append(bar);
+						topic.appendTo(a);
+						a.appendTo(result);
+					$(text).css('background','blue')
+			}
+		}

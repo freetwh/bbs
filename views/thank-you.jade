@@ -1,0 +1,9 @@
+extends layouts/main
+block head
+block content
+	p 谢谢注册！欢迎您成为本站会员。(正在自动登录至首页)
+block script
+	script.
+		setInterval(function(){
+			window.location.href="/"
+		},1000)

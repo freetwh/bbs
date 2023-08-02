@@ -1,0 +1,208 @@
+extends ../layouts/pc.jade
+block head
+	style.
+		.manageusers,.managetopics,.managecomments,.managereplies {
+			display:none;
+		}
+		.on {display:block}
+		.nav li {cursor:pointer}
+		.table a {padding-right:.5rem;}
+		.modal-content {width:405px;}
+		.addUser {width:375px;height:627px;}
+		.addUser html {font-size:20px;}
+block content
+	.container-fluid
+		.container.mt2
+			.row
+				.col-lg-2.col-md-2
+					ul.nav.nav-pills.nav-stacked
+						li.active(role="presentation").on
+							a#manageUser(href="#manageUser") 用户管理
+						li(role="presentation")
+							a#manageTopic(href="#manageTopic") 话题管理
+						li(role="presentation")
+							a#manageComment(href="#manageComment") 评论管理
+						li(role="presentation")
+							a#manageReply(href="#manageReply") 回复管理
+				.col-lg-10.col-md-10.tables
+					.manageusers.on
+						table.table.table-hover
+							thead
+								tr
+									th 用户名
+									th 昵称
+									th 性别
+									th 年龄
+									th 地址
+									th 电话
+									th 操作
+							tbody
+								each u,index in users
+									tr
+										td=u.username
+										td=u.nickname
+										td=u.sex
+										td=u.age
+										td=u.addr
+										td=u.tel
+										td
+											a.del(href="/delete?user="+u._id) 删除
+											a.edit(href="javascript:void(0)",data-id=u._id,data-toggle="modal",data-target="#editUser") 编辑
+						button.create.btn.btn-primary.btn-sm(type="button",data-toggle="modal",data-target="#addUser") 添加用户
+						.text-center
+							ul.pagination
+								li
+									a(href="#",aria-label="Previous")
+										span(aria-hidden="true") &laquo;
+								li
+									a(href="#") 1
+								li
+									a(href="#",aria-label="Next")
+										span(aria-hidden="true") &raquo;
+						#addUser.modal.fade(tabindex="-1",role="dialog",aria-labelledby="myModalLabel")
+							.modal-dialog(role="document")
+								.modal-content
+									.modal-header
+										button.close(type="button",data-dismiss="modal",ria-label="Close")
+											span(aria-hidden="true") &times;
+										h4.modal-title 添加用户
+									.modal-body
+										form.form.form-horizontal(action="/adduser",method="post")
+											input(type="hidden",name="_csrf",value=csrf)
+											.form-group
+												label.col-sm-4.control-label(for="username") 用户名
+												.col-sm-8
+													input.form-control#username(type="text",required,name="user[username]")
+											.form-group
+												label.col-sm-4.control-label(for="password") 密码
+												.col-sm-8
+													input.form-control#password(type="password",required,name="user[password]")
+											.form-group.clearfix
+												.col-sm-8.col-sm-offset-4
+													input.adduser.btn.btn-primary(type="submit",value="添加")
+													if err
+														input(type="hidden",value=err).errinfo
+					.managetopics
+						table.table.table-hover
+							thead
+								tr
+									th 话题
+									th 发表者
+									th 发表时间
+									th 操作
+							tbody
+								each t,index in topics
+									tr
+										td=t.title
+										td=t.publisher.username
+										td=t.launchTime.output()
+										td
+											a.del(href="/delete?topic="+t._id) 删除
+											a(href="/topics/"+t._id) 查看
+						.text-center
+							ul.pagination
+								li
+									a(href="#",aria-label="Previous")
+										span(aria-hidden="true") &laquo;
+								li
+									a(href="#") 1
+								li
+									a(href="#",aria-label="Next")
+										span(aria-hidden="true") &raquo;
+					.managecomments
+						table.table.table-hover
+							thead
+								tr
+									th 评论
+									th 话题
+									th 发表者
+									th 发表时间
+									th 操作
+							tbody
+								each c,index in comments
+									tr
+										td=c.content
+										td=c.topic.title
+										td=c.publisher.username
+										td=c.launchTime.output()
+										td
+											a.del(href="/delete?comment="+c._id) 删除
+											a(href="/topics/"+c.topic._id) 查看
+						.text-center
+							ul.pagination
+								li
+									a(href="#",aria-label="Previous")
+										span(aria-hidden="true") &laquo;
+								li
+									a(href="#") 1
+								li
+									a(href="#") 2
+								li
+									a(href="#",aria-label="Next")
+										span(aria-hidden="true") &raquo;
+					.managereplies
+						table.table.table-hover
+							thead
+								tr
+									th 回复
+									th 时间
+									th 操作
+							tbody
+								each r,index in reply
+									tr
+										td
+											p #{r.reply.from.username} 对 #{r.reply.to.username} 说：#{r.reply.content}
+										td=r.reply.rpTime.output()
+										td
+											a.del(href="/delete?reply="+r.reply._id) 删除
+											a(href="/topics/"+r.topic._id) 查看
+						.text-center
+							ul.pagination
+								li
+									a(href="#",aria-label="Previous")
+										span(aria-hidden="true") &laquo;
+								li
+									a(href="#") 1
+								li
+									a(href="#",aria-label="Next")
+										span(aria-hidden="true") &raquo;
+block script
+	script.
+		window.onload=function(){
+			//- addSlide(tabs)
+			addDelete()
+		}
+		function addDelete(){
+			$('.del').click(function(e){
+				e.preventDefault()
+				var cfm = confirm('确定要删除?');
+				if(cfm){
+					var it = $(this)
+					var url = it.attr('href')
+					$.ajax({
+						type:'get',
+						url:url,
+						success:function(msg){
+							if (msg = 'success'){
+								it.parent().parent().remove();
+								}
+						}
+					})
+				}
+			})
+		}
+		$(function(){
+			$('.nav>li').click(function(){
+				//- if($(this).find('a')[0].href==String(window.location)){
+				//- 	$(this).click();
+				//- }
+				$(this).addClass('active').siblings().removeClass('active')
+				$('.tables>div').eq($(this).index()).addClass('on').siblings().removeClass('on')
+			})
+			var err = $('.errinfo')
+			if(err.val()!=undefined){
+				alert(err.val())
+			}
+		})
+	script(src="/js/ppt.js")
+

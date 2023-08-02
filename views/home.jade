@@ -1,0 +1,39 @@
+extends layouts/main
+block head
+	link(rel="stylesheet",href="styles/ppt.css")
+	link(rel="stylesheet", href="styles/animate.min.css")
+	script(type="text/javascript",src="js/wow.min.js")
+block content
+	#load
+		.loader Loading...
+	include layouts/header
+	include layouts/ppt
+	//话题列表
+	.container.mt1(role="content")
+		if topics
+			each item,index in topics
+				a(href="/topics/"+item._id)
+					.topic.section.tw3.mb1.wow
+						h2=item.title
+						p= item.content
+						.bar
+							span= item.publisher.username
+							time= item.launchTime.output()
+	include layouts/fixbar
+block script
+	script.
+		window.onload = function(){
+			document.getElementById('load').style.display = 'none';
+			initAnimation();
+			var wow = new WOW();
+			wow.init();
+		}
+		function initAnimation(){
+			var animationArr = ['slideInLeft','slideInRight'];
+			//- animationArr[Math.floor(Math.random()*animationArr.length)]
+			var doms = $('.topic');
+			doms.each(function(index,val){
+				$(this).addClass(animationArr[index%2]).attr({'data-wow-duration':'0.5s','data-wow-delay':index*0.2+'s'})
+			})
+
+		}

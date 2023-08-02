@@ -1,0 +1,55 @@
+extends layouts/main
+block head
+	style.
+		.form input,.form select{
+			background:transparent;
+			-webkit-appearance:none;
+		}
+block content
+	include layouts/header
+	form.fc3.form(method="post",action="/editinfo")
+		.section.pt2.vm.tw8
+			label.fx1 用户名：
+			div.fx3.fc6=user.username
+		.section.pt2.vm.tw8
+			label(for="nickname").fx1 昵称：
+			input(type="text",name="user[nickname]",value=user.nickname)#nickname.fx3.fc6
+		.section.pt2.vm.tw8
+			label.fx1 性别：
+			input(type="hidden",value=user.sex)#sex
+			select(name="user[sex]").fx3
+				option(name="user[sex]",value="") 保密
+				option#male(name="user[sex]",value="male") 男
+				option#female(name="user[sex]",value="female") 女
+		.section.pt2.vm.tw8
+			label(for="tel").fx1 电话：
+			input(type="tel",name="user[tel]",value=user.tel)#tel.fx3.fc6=user.tel
+		.section.pt2.vm.tw8
+			label(for="age").fx1 年龄：
+			input(type="text",name="user[age]",value=user.age)#age.fx3.fc6=user.age
+		.section.pt2.vm.tw8
+			label(for="addr").fx1 地址：
+			input(type="text",name="user[addr]",value=user.addr)#addr.fx3.fc6=user.addr
+		.section.pt2.vm.tw8
+			label.fx1 密码：
+			a#password.fx3.fc6(href='/editpwd') 点此修改密码
+		.section.vm.tw8
+			input.btn(type="submit",value="保存").pct50w.left25.mb1.mt1
+block script
+	script.
+		function selectSex(){
+			var sex = document.getElementById('sex').value;
+				var select;
+				switch(sex){
+					case 'male':
+						select = document.getElementById('male');
+						break;
+					case 'female':
+						select = document.getElementById('female');
+						break;
+					default:
+						break;
+				}
+				select.setAttribute('selected','selected')
+		}
+		selectSex()

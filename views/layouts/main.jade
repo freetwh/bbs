@@ -1,0 +1,15 @@
+doctype html
+html
+	head
+		title= title
+		meta(name="viewport",content="width=device-width,initial-scale=0.5,user-scalable=no")
+		link(rel="stylesheet",href="/styles/basic.css")
+		link(rel="stylesheet",href="/styles/mobile.css")
+		link(rel="stylesheet",href="/styles/theme-cool.css")#theme
+		script(src="/js/jQuery-2.1.4.js")
+		script(src="/js/common.js")
+	block head
+	body
+		.container.b-box.tb3
+			block content
+		block script

@@ -1,0 +1,22 @@
+//焦点图
+-var pptData = [{title:'科技周',url:'01.jpg'},{title:'科技周',url:'02.jpg'},{title:'科技周',url:'03.jpg'},{title:'科技周',url:'04.jpg'}];
+if pptData
+	.container.ppts#ppts
+		.ppt-wp#ppt-wp
+			each item,index in pptData
+				div
+					img.aimg(src="imgs/"+item.url,alt=item.title)
+		.ctrl-wp#ctrl-wp
+			each item,index in pptData
+				span
+	script(src="js/ppt.js")
+	script.
+		var doc = document;
+		var ppts={
+			wrapper:doc.getElementById('ppts'),
+			ppts:doc.getElementById('ppt-wp').getElementsByTagName('div'),
+			ctrls:doc.getElementById('ctrl-wp').getElementsByTagName('span'),
+			autoSwitch:true,
+			switchtime:3000,
+		}
+		addSlide(ppts)

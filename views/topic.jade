@@ -1,0 +1,44 @@
+extends layouts/main.jade
+block head
+	-var footinfo = "登陆后可以参与讨论"
+block content
+	//话题列表
+	.container(role="content")#building
+		if topic
+			.topic.tw3.bb.vm
+				h1.fx5.middle-title= topic.title
+				.fx1
+					a.publish.icon-twitch.r(href="/comment?topic="+topic._id)
+		if comments
+			each item,index in comments
+				.comment.tw3.bb
+					.topic.vt
+						figure.fx1.mr1
+							a(href="/homepage/"+item.publisher._id)
+								img.photo-s.round(src="/imgs/photo"+item.publisher.photo)
+						.fx5
+							blockquote.name=item.publisher.username
+							.container
+								time.l=item.launchTime.output()
+								a.cmt.icon-chat.r(href="/reply?topic="+topic._id+"&floor="+item._id)
+							p=item.content
+							if item.reply
+								ul.reply.container
+									each r,index in item.reply
+										li
+											a(href="/reply?topic="+topic._id+"&floor="+item._id+"&toId="+r.from)
+												span.name=r.from.username
+												if r.to
+													span 回复
+													span.name=r.to.username
+												span :#{r.content}
+	include layouts/fixbar
+block script
+	script.
+		// 若页面第一次加载（没有内容），则刷新。
+		$(function(){
+			var content = document.getElementsByClassName('topic');
+			if(!content||content.length==0){
+				window.location.reload();
+			}
+		})
